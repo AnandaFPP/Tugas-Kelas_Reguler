@@ -48,44 +48,26 @@ const biodata = {
 
 // Nomor 2
 
-const mtk = 80
-const bahasaIndonesia = 90
-const bahasaInggris = 89
-const ipa = 69
-
-let totalNilai = (mtk + bahasaIndonesia + bahasaInggris + ipa)/ 4;
-
-// Cara pakai if else
-
-if (totalNilai >= 90) {
-    console.log(`Rata-rata = ${totalNilai}`);
-    console.log(`Grade = A`);
-} else if (totalNilai >= 80 && totalNilai < 90) {
-    console.log(`Rata-rata = ${totalNilai}`);
-    console.log(`Grade = B`);
-} else if (totalNilai >= 70 && totalNilai < 80) {
-    console.log(`Rata-rata = ${totalNilai}`);
-    console.log(`Grade = C`);
-} else if (totalNilai >= 60 && totalNilai < 70) {
-    console.log(`Rata-rata = ${totalNilai}`);
-    console.log(`Grade = D`);
-} else {
-    console.log(`Rata-rata = ${totalNilai}`);
-    console.log(`Grade = E`);
+const mean = (mtk, bahasaIndonesia, bahasaInggris, ipa) => {
+    if (typeof mtk !== 'number' || typeof bahasaIndonesia !== 'number' || typeof bahasaInggris !== 'number' || typeof ipa !== 'number') {
+        console.log('Data is not a Number!')
+        return
+    }
+    let meanNilai = (mtk + bahasaIndonesia + bahasaInggris + ipa) / 4;
+    const grade =
+        meanNilai >= 90 && meanNilai <= 100 ? "Grade = A" :
+        meanNilai >= 80 && meanNilai <= 89 ? "Grade = B" :
+        meanNilai >= 70 && meanNilai <= 79 ? "Grade = C" :
+        meanNilai >= 60 && meanNilai <= 69 ? "Grade = D" :
+        "Grade = E"
+    
+    const result = `Rata-rata = ${meanNilai}
+    ${grade}`
+    return result
 }
 
-// console.log(totalNilai);
-
-// Cara pakai ternary operator
-
-let median = totalNilai >= 90 ? `Rata-rata ${totalNilai} \nGrade = A` :
-            totalNilai >= 80 && totalNilai < 90 ?  `Rata-rata ${totalNilai} \nGrade = B` :
-            totalNilai >= 70 && totalNilai < 80 ?  `Rata-rata ${totalNilai} \nGrade = C` :
-            totalNilai >= 60 && totalNilai < 70 ?  `Rata-rata ${totalNilai} \nGrade = D` :
-            `Rata-rata ${totalNilai} \nGrade = E`;
-
-console.log(median);
-
+let hasil = mean(80, 90, 89, 69)
+console.log(hasil)
 
 
 // Nomor 3
