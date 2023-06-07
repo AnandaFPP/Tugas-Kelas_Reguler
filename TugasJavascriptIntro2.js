@@ -70,8 +70,13 @@ const name = [
     "Deirdre", "Diana", "Elizabeth",
     "Ella", "Faith", "Olivia", "Penelope"]
 
-const searchName = (str, index, validation) => {
+const searchName = (str, index, filterName, validation) => {
+    try {
         validation(str, index)
+    } catch (error) {
+        return console.log(error)
+    }
+    filterName(str, index)
 }
 
 const filterName = (str, index) => {
@@ -85,27 +90,27 @@ const filterName = (str, index) => {
 }
 
 const validation = (str, index) => {
-    try {
         if (!str) throw 'Input tidak boleh kosong!'
         if (typeof str !== "string") throw 'Input harus string!'
         if (!index) throw 'Index tidak boleh kosong!'
         if (typeof index !== "number") throw 'Index harus number!'
-        filterName(str, index)
-    } catch (err) {
-        console.log(err)
-    }
 }
 
-searchName("an", 3, validation);
-searchName("an", "3", validation);
-searchName(5, 3, validation);
-searchName("", 1, validation);
-searchName("an", 0, validation);
+searchName("an", 3, filterName, validation);
+searchName("an", "3", filterName, validation);
+searchName(5, 3, filterName, validation);
+searchName("", 1, filterName, validation);
+searchName("an", 0, filterName, validation);
 
 // Nomor 3
 
-const seleksiNilai = (nilaiAwal, nilaiAkhir, dataArray) => {
-    validasi(nilaiAwal, nilaiAkhir, dataArray)
+const seleksiNilai = (nilaiAwal, nilaiAkhir, dataArray,) => {
+    try {
+        validasi(nilaiAwal, nilaiAkhir, dataArray)
+    } catch (err) {
+        return console.log(err)
+    }
+    seleksi(nilaiAwal, nilaiAkhir, dataArray)
 }
 
 const seleksi = (nilaiAwal, nilaiAkhir, dataArray) => {
@@ -115,20 +120,15 @@ const seleksi = (nilaiAwal, nilaiAkhir, dataArray) => {
             result.push(num)
         }
     })
-    if (result.length === 0) throw 'Nilai tidak ditemukan'
+    if (result.length === 0) return console.log('Nilai tidak ditemukan')
     result.sort((a, b) => a - b)
     console.log(result);
 }
 
 const validasi = (nilaiAwal, nilaiAkhir, dataArray) => {
-    try {
         if (nilaiAwal > nilaiAkhir) throw 'Nilai akhir harus lebih besar dari nilai awal'
         if (!Array.isArray(dataArray)) throw 'Data array harus berupa array'
         if (dataArray.length <= 5) throw 'Jumlah angka dalam dataArray harus lebih dari 5'
-        seleksi(nilaiAwal, nilaiAkhir, dataArray)
-    } catch (err) {
-        console.log(err); 
-    }
 }
 
 seleksiNilai(5, 20 , [2, 25, 4, 14, 17, 30, 8])
