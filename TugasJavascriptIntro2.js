@@ -70,56 +70,57 @@ const name = [
     "Deirdre", "Diana", "Elizabeth",
     "Ella", "Faith", "Olivia", "Penelope"]
 
-const searchName = (str, index, callback) => {
-    try {
-        if (!str) {
-            throw 'Input tidak boleh kosong!'
-        }
-        if (typeof str !== "string") {
-            throw 'Input harus string!'
-        }
-        if (!index) {
-            throw 'Index tidak boleh kosong!'
-        }
-        if (typeof index !== "number") {
-            throw 'Index harus number!'
-        }
-        callback(str, index);
-    } catch (err) {
-        console.log(err)
-    }
+const searchName = (str, index, validation) => {
+        validation(str, index)
 }
 
 const filterName = (str, index) => {
-    let result = [];
-
-    // menggunakan method .map
-    
+    let result = [];    
     name.map((element) => {
         if (element.toLowerCase().includes(str.toLowerCase()) && result.length < index) {
                     result.push(element)
         }
     })
-
-    // menggunakan looping for...of
-
-    for (const element of name) {
-        // console.log(element);
-        // console.log(element.toLowerCase().includes(str.toLowerCase()));
-        if (element.toLowerCase().includes(str.toLowerCase())) {
-            result.push(element)
-        }
-        if (result.length === index) {
-            break
-        }
-    }
     console.log(result)
 }
-searchName("an", 3, filterName);
+
+const validation = (str, index) => {
+    try {
+        if (!str) throw 'Input tidak boleh kosong!'
+        if (typeof str !== "string") throw 'Input harus string!'
+        if (!index) throw 'Index tidak boleh kosong!'
+        if (typeof index !== "number") throw 'Index harus number!'
+        filterName(str, index)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+searchName("an", 3, validation);
+searchName("an", "3", validation);
+searchName(5, 3, validation);
+searchName("", 1, validation);
+searchName("an", 0, validation);
 
 // Nomor 3
 
 const seleksiNilai = (nilaiAwal, nilaiAkhir, dataArray) => {
+    validasi(nilaiAwal, nilaiAkhir, dataArray)
+}
+
+const seleksi = (nilaiAwal, nilaiAkhir, dataArray) => {
+    let result = [];
+    dataArray.map((num) => {
+        if (nilaiAwal < num && num < nilaiAkhir) {
+            result.push(num)
+        }
+    })
+    if (result.length === 0) throw 'Nilai tidak ditemukan'
+    result.sort((a, b) => a - b)
+    console.log(result);
+}
+
+const validasi = (nilaiAwal, nilaiAkhir, dataArray) => {
     try {
         if (nilaiAwal > nilaiAkhir) throw 'Nilai akhir harus lebih besar dari nilai awal'
         if (!Array.isArray(dataArray)) throw 'Data array harus berupa array'
@@ -130,21 +131,8 @@ const seleksiNilai = (nilaiAwal, nilaiAkhir, dataArray) => {
     }
 }
 
-const seleksi = (nilaiAwal, nilaiAkhir, dataArray) => {
-    let result = [];
-    dataArray.map((num) => {
-        if (nilaiAwal < num && num < nilaiAkhir) {
-            result.push(num)
-        }
-    })
-        if (result.length === 0) {
-            throw 'Nilai tidak ditemukan'
-    }
-    result.sort((a, b) => a - b)
-    console.log(result);
-}
-
 seleksiNilai(5, 20 , [2, 25, 4, 14, 17, 30, 8])
 seleksiNilai(15, 3 , [2, 25, 4, 14, 17, 30, 8])
+seleksiNilai(5, 20 , 2)
 seleksiNilai(5, 17 , [2, 25, 4])
 seleksiNilai(5, 17 , [2, 25, 4, 1, 30, 18])
