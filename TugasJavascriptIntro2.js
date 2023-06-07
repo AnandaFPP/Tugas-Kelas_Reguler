@@ -104,7 +104,7 @@ searchName("an", 0, filterName, validation);
 
 // Nomor 3
 
-const seleksiNilai = (nilaiAwal, nilaiAkhir, dataArray,) => {
+const seleksiNilai = (nilaiAwal, nilaiAkhir, dataArray, validasi) => {
     try {
         validasi(nilaiAwal, nilaiAkhir, dataArray)
     } catch (err) {
@@ -131,8 +131,8 @@ const validasi = (nilaiAwal, nilaiAkhir, dataArray) => {
         if (dataArray.length <= 5) throw 'Jumlah angka dalam dataArray harus lebih dari 5'
 }
 
-seleksiNilai(5, 20 , [2, 25, 4, 14, 17, 30, 8])
-seleksiNilai(15, 3 , [2, 25, 4, 14, 17, 30, 8])
-seleksiNilai(5, 20 , 2)
-seleksiNilai(5, 17 , [2, 25, 4])
-seleksiNilai(5, 17 , [2, 25, 4, 1, 30, 18])
+seleksiNilai(5, 20 , [2, 25, 4, 14, 17, 30, 8], validasi)
+seleksiNilai(15, 3 , [2, 25, 4, 14, 17, 30, 8], validasi)
+seleksiNilai(5, 20 , 2, validasi)
+seleksiNilai(5, 17 , [2, 25, 4], validasi)
+seleksiNilai(5, 17 , [2, 25, 4, 1, 30, 18], validasi)
